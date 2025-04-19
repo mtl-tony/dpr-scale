@@ -3,7 +3,7 @@ defaults:
   - override /hydra/launcher: submitit_slurm
 
 trainer:
-  gpus: 8
+  gpus: 2
   num_nodes: 1
   max_epochs: 25
   max_steps: null
@@ -17,11 +17,11 @@ trainer:
 hydra:
   launcher:
     gpus_per_node: ${trainer.gpus}
-    tasks_per_node: ${trainer.gpus}
+    tasks_per_node: 8
     nodes: ${trainer.num_nodes}
     timeout_min: 1440
     cpus_per_task: 10
     mem_gb: 256
     constraint: volta32gb
   sweep:
-    dir: /checkpoint/${env:USER}/hydra_outputs/${hydra.launcher.name}/${now:%Y-%m-%d-%H%M%S}
+    dir: /checkpoint/yuantony/hydra_outputs/${hydra.launcher.name}/${now:%Y-%m-%d-%H%M%S}

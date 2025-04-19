@@ -6,7 +6,7 @@ from dpr_scale.conf.config import MainConfig
 from omegaconf import OmegaConf
 from pytorch_lightning.callbacks import LearningRateMonitor
 from pytorch_lightning.trainer import Trainer
-
+from IPython import embed
 
 """
 Sample commands:
@@ -19,12 +19,15 @@ $ HYDRA_FULL_ERROR=1 buck run //deeplearning/projects/dpr-scale:main -- --info
 
 @hydra.main(config_path="conf", config_name="config")
 def main(cfg: MainConfig):
+    embed()
+
     print(OmegaConf.to_yaml(cfg))
     # Temp patch for datamodule refactoring
     cfg.task.datamodule = None
     task = hydra.utils.instantiate(cfg.task, _recursive_=False)
 
     assert cfg.task.model.model_path == cfg.task.transform.model_path
+
     transform = hydra.utils.instantiate(cfg.task.transform)
     datamodule = hydra.utils.instantiate(cfg.datamodule, transform=transform)
     checkpoint_callback = hydra.utils.instantiate(cfg.checkpoint_callback)
