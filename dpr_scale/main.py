@@ -19,8 +19,6 @@ $ HYDRA_FULL_ERROR=1 buck run //deeplearning/projects/dpr-scale:main -- --info
 
 @hydra.main(config_path="conf", config_name="config")
 def main(cfg: MainConfig):
-    embed()
-
     print(OmegaConf.to_yaml(cfg))
     # Temp patch for datamodule refactoring
     cfg.task.datamodule = None
