@@ -23,7 +23,6 @@ def main(cfg: MainConfig):
     # Temp patch for datamodule refactoring
     cfg.task.datamodule = None
     task = hydra.utils.instantiate(cfg.task, _recursive_=False)
-
     assert cfg.task.model.model_path == cfg.task.transform.model_path
 
     transform = hydra.utils.instantiate(cfg.task.transform)
