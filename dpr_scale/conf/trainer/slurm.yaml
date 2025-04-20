@@ -24,4 +24,4 @@ hydra:
     mem_gb: 256
     constraint: volta32gb
   sweep:
-    dir: /checkpoint/yuantony/hydra_outputs/${hydra.launcher.name}/${now:%Y-%m-%d-%H%M%S}
+    dir: /Tmp/yuantony/checkpoint/hydra_outputs/${hydra.launcher.name}/${now:%Y-%m-%d-%H%M%S}
